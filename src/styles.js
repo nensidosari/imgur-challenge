@@ -5,11 +5,11 @@ display:grid;
 grid-template-columns: repeat(4, 1fr);
 grid-gap: 20px;
 
->div>div {
+>div {
 border:1px solid black;
 }
 
->div >div>img {
+>div >img {
 width: 100%;}
 
 
