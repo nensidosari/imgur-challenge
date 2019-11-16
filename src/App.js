@@ -7,6 +7,8 @@ import {Grid} from "./styles";
 const App = ({images, actions}) =>{
 
   useEffect(()=> actions.getImages(),[]);
+
+
   return (
     <Grid>
       <div> {images.map(image => <div key={image.id}><img src={image.link} alt={image.title}/><div>{image.description}</div></div>)}</div>
