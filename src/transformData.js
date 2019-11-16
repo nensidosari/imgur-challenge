@@ -1,4 +1,4 @@
-const transformData = (images = []) =>
+const filterImageData = (images = []) =>
   images.map(
     ({
       id,
@@ -16,6 +16,13 @@ const transformData = (images = []) =>
         id,
         title,
         description,
+        images:
+          images &&
+          images.map(({ link, decription, title }) => ({
+            link,
+            decription,
+            title
+          })),
         link: images ? images.map(img => img.link)[0] : link,
         score,
         ups,
@@ -26,4 +33,4 @@ const transformData = (images = []) =>
     }
   );
 
-export default transformData;
+export { filterImageData };

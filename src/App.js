@@ -1,33 +1,14 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getImages } from "./store/actions/actionCreators";
-import transformData from "./transformData";
-import { Grid } from "./styles";
+import React from "react";
 
-const App = ({ images, actions }) => {
-  useEffect(() => actions.getImages(), []);
+import { Header, Layout } from "./Components";
 
+const App = () => {
   return (
-    <Grid>
-        {images.map(image => (
-          <div key={image.id}>
-            <img src={image.link} alt={image.title} />
-            <div>{image.description}</div>
-          </div>
-        ))}
-    </Grid>
+    <>
+      <Header title={"Imgur Coding Challenge"} />
+      <Layout />
+    </>
   );
 };
 
-const mapStateToProps = ({ images }) => ({
-  images: transformData(images)
-});
-
-const mapDispatchToProps = dispatch => ({
-  actions: {
-    getImages: () =>
-      dispatch(getImages({ section: "hot", sort: "viral", window: "day" }, {}))
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
