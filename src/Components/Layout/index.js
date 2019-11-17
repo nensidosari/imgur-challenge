@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 import { useWindowSize } from "../../customHooks";
 import { getImages } from "../../store/actions/actionCreators";
@@ -18,7 +19,23 @@ const Layout = ({ actions, images }) => {
   useEffect(() => actions.getImages(), [actions]);
 
   useEffect(() => {
-    let cardDesiredWidth = (width - margin * 2 - 20 * (columns - 1)) / 4;
+    let col = columns;
+    if (isPhone) {
+      setMargin(25);
+      setColumns(1);
+      col = 1;
+    } else if (isIPadPortrait) {
+      setMargin(50);
+      setColumns(3);
+      col = 3;
+    } else if (isIPadProPortrait) {
+      setColumns(3);
+      col = 3;
+    } else if (columns !== 4) {
+      setColumns(4);
+      setMargin(100);
+    }
+    let cardDesiredWidth = (width - margin * 2 - 20 * (col - 1)) / col;
 
     setCardWidth(`${cardDesiredWidth}px`);
   }, [width]);
@@ -58,6 +75,17 @@ const Layout = ({ actions, images }) => {
         ))}
       </div>
     ));
+
+  const isIPadProPortrait = useMediaQuery({
+    query: "(max-width: 1024px)"
+  });
+  const isIPadPortrait = useMediaQuery({
+    query: "(max-width: 768px)"
+  });
+
+  const isPhone = useMediaQuery({
+    query: "(max-width: 500px)"
+  });
 
   return (
     <LayoutContainer margin={margin}>

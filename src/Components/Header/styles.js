@@ -13,7 +13,7 @@ const Title = styled.div`
   color: white;
   margin: auto 50px;
   font-family: Acme;
-  font-size: 30px;
+  font-size: 20px;
 `;
 
 export { HeaderContainer, Title };
