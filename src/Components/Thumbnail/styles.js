@@ -20,7 +20,7 @@ const ThumbnailCard = styled.div`
     -webkit-filter: opacity(60%);
     filter: opacity(60%);
     cursor: pointer;
-    z-index: 2;
+    z-index: 1;
   }
 `;
 

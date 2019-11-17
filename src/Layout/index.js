@@ -28,7 +28,14 @@ const Layout = ({ actions, images, loading }) => {
     query: "(max-width: 500px)"
   });
 
-  useEffect(() => actions.getImages(), [actions]);
+  useEffect(
+    () =>
+      actions.getImages(
+        { section: "hot", sort: "viral", window: "day" },
+        { showViral: true }
+      ),
+    [actions]
+  );
 
   useEffect(() => {
     let col = columns;
@@ -92,7 +99,7 @@ const Layout = ({ actions, images, loading }) => {
 
   return (
     <LayoutContainer margin={margin}>
-      <ActionBar />
+      <ActionBar getImages={params => actions.getImages({ ...params })} />
       <Grid columns={columns} width={cardWidth}>
         {loading ? <Skeleton columns={columns} /> : renderThumbnails()}
       </Grid>
@@ -107,8 +114,7 @@ const mapStateToProps = ({ images, loading }) => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    getImages: () =>
-      dispatch(getImages({ section: "hot", sort: "viral", window: "day" }, {}))
+    getImages: (keys, params) => dispatch(getImages({ ...keys }, { ...params }))
   }
 });
 

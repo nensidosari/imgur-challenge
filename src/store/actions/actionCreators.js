@@ -2,8 +2,6 @@ import axios from "axios";
 import { GET_IMAGES_SUCCESS, GET_IMAGES_LOADING } from "./actionTypes";
 
 const getUrl = keys => {
-  console.log(keys);
-
   let url = `https://api.imgur.com/3/gallery`;
 
   Object.keys(keys).map(
