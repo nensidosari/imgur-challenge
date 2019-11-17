@@ -9,17 +9,21 @@ import {
   ImgNumberDiv
 } from "./styles";
 
-const Thumbnail = ({ link, title, description, images, width }) => {
+const Thumbnail = ({ link, title, description, images, width, id }) => {
   const showImgOrVideo = () =>
     link.includes(".mp4") && link.slice(-4) === ".mp4" ? (
-      <video draggable="false" playsInline loop autoPlay alt={title}>
+      <video draggable="false" playsInline loop autoPlay alt={title} id={id}>
         <source
           src={link + "?maxwidth=520&shape=thumb&fidelity=high"}
           type="video/mp4"
         />
       </video>
     ) : (
-      <img src={link + "?maxwidth=520&shape=thumb&fidelity=high"} alt={title} />
+      <img
+        src={link + "?maxwidth=520&shape=thumb&fidelity=high"}
+        alt={title}
+        id={id}
+      />
     );
   return (
     <ThumbnailCard>

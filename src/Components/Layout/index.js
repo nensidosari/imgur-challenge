@@ -6,15 +6,27 @@ import { useWindowSize } from "../../customHooks";
 import { getImages } from "../../store/actions/actionCreators";
 import { filterImageData } from "../../transformData";
 import { Thumbnail } from "../index";
+import Skeleton from "./skeleton";
 
 import { LayoutContainer, Grid } from "./styles";
 
-const Layout = ({ actions, images }) => {
+const Layout = ({ actions, images, loading }) => {
   const [columns, setColumns] = useState(4);
   const [cardWidth, setCardWidth] = useState("200px");
   const [margin, setMargin] = useState(100);
 
   const [width] = useWindowSize();
+
+  const isIPadProPortrait = useMediaQuery({
+    query: "(max-width: 1024px)"
+  });
+  const isIPadPortrait = useMediaQuery({
+    query: "(max-width: 768px)"
+  });
+
+  const isPhone = useMediaQuery({
+    query: "(max-width: 500px)"
+  });
 
   useEffect(() => actions.getImages(), [actions]);
 
@@ -38,7 +50,7 @@ const Layout = ({ actions, images }) => {
     let cardDesiredWidth = (width - margin * 2 - 20 * (col - 1)) / col;
 
     setCardWidth(`${cardDesiredWidth}px`);
-  }, [width]);
+  }, [width, columns, isIPadPortrait, isIPadProPortrait, isPhone, margin]);
 
   const orderThumbnails = () => {
     let currentColumn = 0;
@@ -55,6 +67,7 @@ const Layout = ({ actions, images }) => {
         images
       });
       currentColumn = currentColumn === columns - 1 ? 0 : currentColumn + 1;
+      return {};
     });
 
     return columnsImages;
@@ -66,6 +79,7 @@ const Layout = ({ actions, images }) => {
         {column.map(({ link, title, description, id, images }) => (
           <Thumbnail
             key={id}
+            id={id}
             link={link}
             title={title}
             description={description}
@@ -76,28 +90,18 @@ const Layout = ({ actions, images }) => {
       </div>
     ));
 
-  const isIPadProPortrait = useMediaQuery({
-    query: "(max-width: 1024px)"
-  });
-  const isIPadPortrait = useMediaQuery({
-    query: "(max-width: 768px)"
-  });
-
-  const isPhone = useMediaQuery({
-    query: "(max-width: 500px)"
-  });
-
   return (
     <LayoutContainer margin={margin}>
       <Grid columns={columns} width={cardWidth}>
-        {renderThumbnails()}
+        {loading ? <Skeleton columns={columns} /> : renderThumbnails()}
       </Grid>
     </LayoutContainer>
   );
 };
 
-const mapStateToProps = ({ images }) => ({
-  images: filterImageData(images)
+const mapStateToProps = ({ images, loading }) => ({
+  images: filterImageData(images),
+  loading
 });
 
 const mapDispatchToProps = dispatch => ({

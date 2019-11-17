@@ -34,10 +34,12 @@ const Content = styled.div`
 
 const Title = styled.div`
   font-size: 18px;
+  word-wrap: break-word;
 `;
 
 const Description = styled.div`
   font-size: 13px;
+  word-wrap: break-word;
 `;
 
 const TotalImages = styled.div`
@@ -64,11 +66,25 @@ const ImgNumberDiv = styled.div`
   font-family: Acme;
 `;
 
+const ThumbnailSkeleton = styled.div`
+  ${props => {
+    const { height, color } = props;
+    return css`
+      height: ${height + "px"};
+      background: linear-gradient(${color}, rgb(46, 48, 53));
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+    `;
+  }}
+`;
+
 export {
   ThumbnailCard,
   Content,
   Title,
   Description,
   TotalImages,
-  ImgNumberDiv
+  ImgNumberDiv,
+  ThumbnailSkeleton
 };
