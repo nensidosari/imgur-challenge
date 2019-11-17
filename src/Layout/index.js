@@ -15,6 +15,7 @@ const Layout = ({ actions, images, loading }) => {
   const [cardWidth, setCardWidth] = useState("200px");
   const [margin, setMargin] = useState(100);
   const [openModal, setOpenModal] = useState(false);
+  const [openedImg, setOpenedImg] = useState({});
 
   const [width] = useWindowSize();
 
@@ -60,19 +61,24 @@ const Layout = ({ actions, images, loading }) => {
     let currentColumn = 0;
     const columnsImages = [];
 
-    images.map(({ link, title, description, id, images }) => {
-      if (!columnsImages[currentColumn]) columnsImages[currentColumn] = [];
+    images.map(
+      ({ link, title, description, id, images, ups, downs, score }) => {
+        if (!columnsImages[currentColumn]) columnsImages[currentColumn] = [];
 
-      columnsImages[currentColumn].push({
-        link,
-        title,
-        description,
-        id,
-        images
-      });
-      currentColumn = currentColumn === columns - 1 ? 0 : currentColumn + 1;
-      return {};
-    });
+        columnsImages[currentColumn].push({
+          link,
+          title,
+          description,
+          id,
+          images,
+          ups,
+          downs,
+          score
+        });
+        currentColumn = currentColumn === columns - 1 ? 0 : currentColumn + 1;
+        return {};
+      }
+    );
 
     return columnsImages;
   };
@@ -80,18 +86,33 @@ const Layout = ({ actions, images, loading }) => {
   const renderThumbnails = () =>
     orderThumbnails().map((column, i) => (
       <div key={i}>
-        {column.map(({ link, title, description, id, images }) => (
-          <Thumbnail
-            key={id}
-            id={id}
-            link={link}
-            title={title}
-            description={description}
-            images={images}
-            width={cardWidth}
-            onClick={id => setOpenModal(true)}
-          />
-        ))}
+        {column.map(
+          ({ link, title, description, id, images, ups, downs, score }) => (
+            <Thumbnail
+              key={id}
+              id={id}
+              link={link}
+              title={title}
+              description={description}
+              images={images}
+              width={cardWidth}
+              onClick={id => {
+                setOpenModal(true);
+                setOpenedImg({
+                  link,
+                  title,
+                  description,
+                  id,
+                  images,
+                  ups,
+                  downs,
+                  score
+                });
+                document.body.style.overflowY = "hidden";
+              }}
+            />
+          )
+        )}
       </div>
     ));
 
@@ -107,7 +128,12 @@ const Layout = ({ actions, images, loading }) => {
       </Grid>
       <FullscreenModal
         openModal={openModal}
-        close={() => setOpenModal(false)}
+        img={openedImg}
+        close={() => {
+          setOpenModal(false);
+          setOpenedImg({});
+          document.body.style.overflowY = "unset";
+        }}
       />
     </LayoutContainer>
   );
