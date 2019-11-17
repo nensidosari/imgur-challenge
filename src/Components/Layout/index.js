@@ -27,44 +27,60 @@ const Layout = ({ actions, images }) => {
     <LayoutContainer margin={margin}>
       <Grid columns={columns} width={cardWidth}>
         <div>
-          {images.slice(0, 10).map(({ link, title, description, id }) => (
-            <Thumbnail
-              key={id}
-              link={link}
-              title={title}
-              description={description}
-            />
-          ))}
+          {images
+            .slice(0, 10)
+            .map(({ link, title, description, id, images }) => (
+              <Thumbnail
+                key={id}
+                link={link}
+                title={title}
+                description={description}
+                images={images}
+                width={cardWidth}
+              />
+            ))}
         </div>
         <div>
-          {images.slice(11, 20).map(({ link, title, description, id }) => (
-            <Thumbnail
-              key={id}
-              link={link}
-              title={title}
-              description={description}
-            />
-          ))}
+          {images
+            .slice(11, 20)
+            .map(({ link, title, description, id, images }) => (
+              <Thumbnail
+                key={id}
+                link={link}
+                title={title}
+                description={description}
+                images={images}
+                width={cardWidth}
+              />
+            ))}
         </div>
         <div>
-          {images.slice(21, 30).map(({ link, title, description, id }) => (
-            <Thumbnail
-              key={id}
-              link={link}
-              title={title}
-              description={description}
-            />
-          ))}
+          {images
+            .slice(21, 30)
+            .map(({ link, title, description, id, images }) => (
+              <Thumbnail
+                key={id}
+                link={link}
+                title={title}
+                description={description}
+                images={images}
+                width={cardWidth}
+              />
+            ))}
         </div>
         <div>
-          {images.slice(31, 40).map(({ link, title, description, id }) => (
-            <Thumbnail
-              key={id}
-              link={link}
-              title={title}
-              description={description}
-            />
-          ))}
+          {images
+            .slice(31, 40)
+            .map(({ link, title, description, id, images }) => (
+              <Thumbnail
+                key={id}
+                link={link}
+                title={title}
+                description={description}
+                images={images}
+                width={cardWidth}
+              />
+            ))}
         </div>
       </Grid>
     </LayoutContainer>

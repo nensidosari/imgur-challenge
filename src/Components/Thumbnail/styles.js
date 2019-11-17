@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const ThumbnailCard = styled.div`
   margin-bottom: 20px;
@@ -40,4 +40,35 @@ const Description = styled.div`
   font-size: 13px;
 `;
 
-export { ThumbnailCard, Content, Title, Description };
+const TotalImages = styled.div`
+  ${props => {
+    const { width } = props;
+    return css`
+      display: flex;
+      position: absolute;
+      width: ${width};
+      justify-content: flex-end;
+    `;
+  }}
+`;
+
+const ImgNumberDiv = styled.div`
+  width: 30px;
+  height: 24px;
+  background: rgba(82, 85, 94, 0.6);
+  color: white;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 24px;
+  font-family: Acme;
+`;
+
+export {
+  ThumbnailCard,
+  Content,
+  Title,
+  Description,
+  TotalImages,
+  ImgNumberDiv
+};
