@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { useWindowSize } from "../customHooks";
 import { getImages } from "../store/actions/actionCreators";
 import { filterImageData } from "../transformData";
-import { Thumbnail, ActionBar } from "../Components/index";
+import { Thumbnail, ActionBar, FullscreenModal } from "../Components/index";
 import Skeleton from "./skeleton";
 
 import { LayoutContainer, Grid } from "./styles";
@@ -14,6 +14,7 @@ const Layout = ({ actions, images, loading }) => {
   const [columns, setColumns] = useState(4);
   const [cardWidth, setCardWidth] = useState("200px");
   const [margin, setMargin] = useState(100);
+  const [openModal, setOpenModal] = useState(false);
 
   const [width] = useWindowSize();
 
@@ -29,11 +30,7 @@ const Layout = ({ actions, images, loading }) => {
   });
 
   useEffect(
-    () =>
-      actions.getImages(
-        { section: "hot", sort: "viral", window: "day" },
-        { showViral: true }
-      ),
+    () => actions.getImages({ section: "hot", sort: "viral", window: "day" }),
     [actions]
   );
 
@@ -92,6 +89,7 @@ const Layout = ({ actions, images, loading }) => {
             description={description}
             images={images}
             width={cardWidth}
+            onClick={id => setOpenModal(true)}
           />
         ))}
       </div>
@@ -107,6 +105,10 @@ const Layout = ({ actions, images, loading }) => {
       <Grid columns={columns} width={cardWidth}>
         {loading ? <Skeleton columns={columns} /> : renderThumbnails()}
       </Grid>
+      <FullscreenModal
+        openModal={openModal}
+        close={() => setOpenModal(false)}
+      />
     </LayoutContainer>
   );
 };

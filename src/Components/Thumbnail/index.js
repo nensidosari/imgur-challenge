@@ -9,7 +9,15 @@ import {
   ImgNumberDiv
 } from "./styles";
 
-const Thumbnail = ({ link, title, description, images, width, id }) => {
+const Thumbnail = ({
+  link,
+  title,
+  description,
+  images,
+  width,
+  id,
+  onClick
+}) => {
   const showImgOrVideo = () =>
     link.includes(".mp4") && link.slice(-4) === ".mp4" ? (
       <video draggable="false" playsInline loop autoPlay alt={title} id={id}>
@@ -26,7 +34,7 @@ const Thumbnail = ({ link, title, description, images, width, id }) => {
       />
     );
   return (
-    <ThumbnailCard>
+    <ThumbnailCard onClick={() => onClick(id)}>
       {images && images.length > 1 && (
         <TotalImages width={width}>
           <ImgNumberDiv>{images.length}</ImgNumberDiv>
