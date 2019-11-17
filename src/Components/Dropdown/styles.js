@@ -63,7 +63,7 @@ const ValuesContainer = styled.div`
       border-radius: 5px;
       box-shadow: 0 9px 25px 0 rgba(0, 0, 0, 0.78);
       position: absolute;
-      margin: -30px 70px;
+      margin: -30px 90px;
       width: 0;
       overflow: auto;
       z-index: 2;

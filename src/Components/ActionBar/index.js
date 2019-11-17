@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Dropdown } from "../index";
+import { Dropdown, Checkbox } from "../index";
 
 import { ActionDiv } from "./styles";
 
@@ -40,10 +40,23 @@ const ActionBar = ({ getImages }) => {
             changeSelected={val => {
               setSelected({ ...selected, [type]: val });
               setIsOpen(false);
-              getImages({ ...selected, [type]: val }, { showViral });
+
+              getImages(
+                { ...selected, [type]: val },
+                { ...(selected.section !== "user" ? {} : showViral) }
+              );
             }}
           />
         ))}
+      {selected.section === "user" && (
+        <Checkbox
+          changeParam={() => {
+            getImages({ ...selected }, { showViral: !showViral });
+            setShowViral(!showViral);
+          }}
+          showViral={showViral}
+        />
+      )}
     </ActionDiv>
   );
 };

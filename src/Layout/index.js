@@ -99,7 +99,11 @@ const Layout = ({ actions, images, loading }) => {
 
   return (
     <LayoutContainer margin={margin}>
-      <ActionBar getImages={params => actions.getImages({ ...params })} />
+      <ActionBar
+        getImages={(keys, params) =>
+          actions.getImages({ ...keys }, { ...params })
+        }
+      />
       <Grid columns={columns} width={cardWidth}>
         {loading ? <Skeleton columns={columns} /> : renderThumbnails()}
       </Grid>
