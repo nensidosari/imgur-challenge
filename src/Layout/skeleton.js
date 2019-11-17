@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ThumbnailSkeleton } from "../index";
+import { ThumbnailSkeleton } from "../Components/index";
 
 const Skeleton = ({ columns }) => {
   const orderThumbnailSkeleton = () => {

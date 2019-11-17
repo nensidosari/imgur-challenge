@@ -1,6 +1,7 @@
 import Header from "./Header";
-import Layout from "./Layout";
 import Thumbnail from "./Thumbnail";
 import ThumbnailSkeleton from "./Thumbnail/skeleton";
+import ActionBar from "./ActionBar";
+import Dropdown from "./Dropdown";
 
-export { Header, Layout, Thumbnail, ThumbnailSkeleton };
+export { Header, Thumbnail, ThumbnailSkeleton, ActionBar, Dropdown };

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
-import { useWindowSize } from "../../customHooks";
-import { getImages } from "../../store/actions/actionCreators";
-import { filterImageData } from "../../transformData";
-import { Thumbnail } from "../index";
+import { useWindowSize } from "../customHooks";
+import { getImages } from "../store/actions/actionCreators";
+import { filterImageData } from "../transformData";
+import { Thumbnail, ActionBar } from "../Components/index";
 import Skeleton from "./skeleton";
 
 import { LayoutContainer, Grid } from "./styles";
@@ -47,7 +47,7 @@ const Layout = ({ actions, images, loading }) => {
       setColumns(4);
       setMargin(100);
     }
-    let cardDesiredWidth = (width - margin * 2 - 20 * (col - 1)) / col;
+    let cardDesiredWidth = (width - margin * 2 - 20 * col) / col;
 
     setCardWidth(`${cardDesiredWidth}px`);
   }, [width, columns, isIPadPortrait, isIPadProPortrait, isPhone, margin]);
@@ -92,6 +92,7 @@ const Layout = ({ actions, images, loading }) => {
 
   return (
     <LayoutContainer margin={margin}>
+      <ActionBar />
       <Grid columns={columns} width={cardWidth}>
         {loading ? <Skeleton columns={columns} /> : renderThumbnails()}
       </Grid>

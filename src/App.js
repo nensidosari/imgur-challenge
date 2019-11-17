@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Header, Layout } from "./Components";
+import Layout from "./Layout";
+import { Header } from "./Components";
 
 const App = () => {
   return (
