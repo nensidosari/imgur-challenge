@@ -2,7 +2,6 @@ import React from "react";
 
 import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import "jest-styled-components";
 
 import Checkbox from "./";
 
@@ -10,7 +9,7 @@ import { Label, CheckboxWrapper, Box } from "./styles";
 
 configure({ adapter: new Adapter() });
 
-describe("<Button/>", () => {
+describe("<Checkbox/>", () => {
   let wrapper;
   let changeParam;
   beforeEach(() => {

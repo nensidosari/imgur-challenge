@@ -5,13 +5,14 @@ import {
   Selected,
   Underline,
   ValuesContainer,
-  Value
+  Value,
+  Icon
 } from "./styles";
 
 const Dropdown = ({
   type,
-  values,
-  selected,
+  values = [],
+  selected = "",
   openDropdown,
   isOpen = false,
   changeSelected
@@ -19,15 +20,19 @@ const Dropdown = ({
   return (
     <DropdownContainer>
       <Underline onClick={() => openDropdown({ type: isOpen ? false : type })}>
-        <Selected isOpen={isOpen}>
-          {selected.toLocaleUpperCase()}
-          <i className="fa fa-angle-down" aria-hidden="true"></i>
+        <Selected>
+          {selected && selected.toString().toLocaleUpperCase()}
+          <Icon
+            className="fa fa-angle-down"
+            aria-hidden="true"
+            isOpen={isOpen}
+          ></Icon>
         </Selected>
       </Underline>
       <ValuesContainer isOpen={isOpen}>
         {values.map((val, i) => (
           <Value key={i} onClick={() => changeSelected(val)}>
-            {val.toLocaleUpperCase()}
+            {val && val.toString().toLocaleUpperCase()}
           </Value>
         ))}
       </ValuesContainer>

@@ -9,26 +9,11 @@ const DropdownContainer = styled.div`
 `;
 
 const Selected = styled.div`
-  ${props => {
-    const { isOpen } = props;
-    return css`
   font-size: 20px;
 
   :hover {
     color: rgba(255, 255, 255, 0.5);
   }
-
-  > i {
-    margin-left: 10px;
-    transition: all 0.5s ease;
-
-   
-    ${isOpen &&
-      css`
-        transform: rotate(-90deg);
-      `}
-    }}`;
-  }}
 `;
 
 const Underline = styled.div`
@@ -89,4 +74,20 @@ const Value = styled.div`
   }
 `;
 
-export { DropdownContainer, Selected, Underline, ValuesContainer, Value };
+const Icon = styled.i`
+  ${props => {
+    const { isOpen } = props;
+    return css`
+  
+      margin-left: 10px;
+      transition: all 0.5s ease;
+
+      ${isOpen &&
+        css`
+          transform: rotate(-90deg);
+        `}
+    }}`;
+  }}
+`;
+
+export { DropdownContainer, Selected, Underline, ValuesContainer, Value, Icon };

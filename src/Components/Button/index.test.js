@@ -29,22 +29,26 @@ describe("<Button/>", () => {
     wrapper.setProps({ text: "text" });
     expect(wrapper.find("#text")).toHaveLength(1);
   });
+
   it("should fire onClickButton on button click if not disabled", () => {
     wrapper.setProps({ onClickButton });
     wrapper.find("#styledButton").simulate("click");
     expect(onClickButton).toHaveBeenCalled();
   });
+
   it("should not fire onClickButton on button click if disabled", () => {
     wrapper.setProps({ onClickButton, disabled: true });
     wrapper.find("#styledButton").simulate("click");
     expect(onClickButton).toHaveBeenCalledTimes(0);
   });
-  it("should fire onClickButton on button click if disabled with 1 arg", () => {
+
+  it("should fire onClickButton on button click if not disabled with 1 arg", () => {
     const name = "nensi";
     wrapper.setProps({ onClickButton, name });
     wrapper.find("#styledButton").simulate("click");
     expect(onClickButton).toHaveBeenCalledWith(name);
   });
+
   it("should not allow pointer events if is disabled", () => {
     wrapper = mount(<Button />);
     wrapper.setProps({ disabled: true });
