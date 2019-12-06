@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Dropdown, Checkbox } from "../index";
+import { Dropdown, Checkbox, Pagination } from "../../Components/index";
 
 import { ActionDiv } from "./styles";
 
@@ -14,10 +14,50 @@ const ActionBar = ({ getImages }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState({
     section: "hot",
+    sort: "viral",
     window: "day",
-    sort: "viral"
+    page: 1
   });
   const [showViral, setShowViral] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages] = useState(10);
+
+  const sendPageRequest = page => {
+    setSelected({ ...selected, page });
+    getImages(
+      { ...selected, page },
+      { ...(selected.section !== "user" ? {} : showViral) }
+    );
+  };
+  const handlePageButtonClick = name => {
+    let currPage = currentPage;
+
+    switch (name) {
+      case "next": {
+        currPage = currentPage + 1;
+
+        setCurrentPage(prevPage => prevPage + 1);
+        return sendPageRequest(currPage);
+      }
+      case "prev": {
+        currPage = currentPage - 1;
+        setCurrentPage(prevPage => prevPage - 1);
+        return sendPageRequest(currPage);
+      }
+      case "start": {
+        currPage = 1;
+        setCurrentPage(1);
+        return sendPageRequest(currPage);
+      }
+      case "end": {
+        currPage = totalPages;
+        setCurrentPage(totalPages);
+        return sendPageRequest(currPage);
+      }
+      default:
+        return sendPageRequest(currPage);
+    }
+  };
 
   return (
     <ActionDiv>
@@ -57,6 +97,12 @@ const ActionBar = ({ getImages }) => {
           showViral={showViral}
         />
       )}
+
+      <Pagination
+        handlePageButtonClick={handlePageButtonClick}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
     </ActionDiv>
   );
 };

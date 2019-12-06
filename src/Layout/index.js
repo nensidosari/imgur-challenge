@@ -5,7 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { useWindowSize } from "../customHooks";
 import { getImages } from "../store/actions/actionCreators";
 import { filterImageData } from "../transformData";
-import { Thumbnail, ActionBar, FullscreenModal } from "../Components/index";
+import { Thumbnail, FullscreenModal } from "../Components";
+import { ActionBar } from "../Containers";
 import Skeleton from "./skeleton";
 
 import { LayoutContainer, Grid } from "./styles";

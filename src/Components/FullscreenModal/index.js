@@ -54,15 +54,15 @@ const FullScreenModal = ({ openModal, close, img = {} }) => {
           </div>
           <Ratings>
             <div>
-              <i class="fa fa-arrow-up" />
+              <i className="fa fa-arrow-up" />
               {ups}
             </div>
             <div>
-              <i class="fa fa-arrow-down" />
+              <i className="fa fa-arrow-down" />
               {downs}
             </div>
             <div>
-              <i class="fa fa-star" aria-hidden="true" />
+              <i className="fa fa-star" aria-hidden="true" />
               {score}
             </div>
           </Ratings>
