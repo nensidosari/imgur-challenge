@@ -4,7 +4,7 @@ import { StyledButton } from "./styles";
 
 const Button = ({
   icon,
-  text = "",
+  text,
   iconPosition = "right",
   name,
   onClickButton,
@@ -12,10 +12,14 @@ const Button = ({
 }) => {
   const renderIcon = () => <i className={icon}></i>;
   return (
-    <StyledButton onClick={() => onClickButton(name)} disabled={disabled}>
-      {iconPosition === "left" && renderIcon()}
-      {text}
-      {iconPosition === "right" && renderIcon()}
+    <StyledButton
+      onClick={() => !disabled && onClickButton(name)}
+      disabled={disabled}
+      id="styledButton"
+    >
+      {icon && iconPosition === "left" && renderIcon()}
+      {text && <div id="text">{text} </div>}
+      {icon && iconPosition === "right" && renderIcon()}
     </StyledButton>
   );
 };

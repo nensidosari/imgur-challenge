@@ -12,6 +12,7 @@ const StyledButton = styled.div`
       :hover {
         color: rgba(255, 255, 255, 0.5);
       }
+      display: flex;
       ${props.disabled &&
         "color:rgba(255, 255, 255, 0.5);cursor:not-allowed;pointer-events:none;"}
     `;
