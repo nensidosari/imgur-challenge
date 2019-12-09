@@ -14,7 +14,6 @@ import {
   TotalImages,
   ImgNumberDiv
 } from "./styles";
-import { wrap } from "module";
 
 configure({ adapter: new Adapter() });
 
@@ -73,5 +72,14 @@ describe("<Thumbnail/>", () => {
     wrapper.setProps({ onClick: imitateFunc, id });
     wrapper.find(ThumbnailCard).simulate("click");
     expect(imitateFunc).toHaveBeenCalledWith(id);
+  });
+
+  it("should render one <TotalImages/> with width:50px ", () => {
+    const images = [{ link: "test1.jpg" }, { link: "test2.jpg" }];
+
+    wrapper = mount(
+      <Thumbnail link={"test.mp4"} id={1} width={"50px"} images={images} />
+    );
+    expect(wrapper.find(TotalImages)).toHaveStyleRule("width", "50px");
   });
 });
