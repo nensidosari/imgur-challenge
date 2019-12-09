@@ -4,11 +4,11 @@ import { Button } from "../";
 
 import { Flex, CurrentPage } from "./styles";
 
-const buttonIconsRight = {
+export const buttonIconsRight = {
   next: "fa fa-angle-right",
   end: "fa fa-angle-double-right"
 };
-const buttonIconsLeft = {
+export const buttonIconsLeft = {
   start: "fa fa-angle-double-left",
   prev: "fa fa-angle-left"
 };
