@@ -20,7 +20,15 @@ const Thumbnail = ({
 }) => {
   const showImgOrVideo = () =>
     link.includes(".mp4") && link.slice(-4) === ".mp4" ? (
-      <video draggable="false" playsInline loop autoPlay alt={title} id={id}>
+      <video
+        draggable="false"
+        playsInline
+        loop
+        autoPlay
+        alt={title}
+        id={id}
+        className="videoTag"
+      >
         <source
           src={link + "?maxwidth=520&shape=thumb&fidelity=high"}
           type="video/mp4"
@@ -31,6 +39,7 @@ const Thumbnail = ({
         src={link + "?maxwidth=520&shape=thumb&fidelity=high"}
         alt={title}
         id={id}
+        className="imageTag"
       />
     );
   return (
