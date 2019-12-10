@@ -4,7 +4,7 @@ import { Dropdown, Checkbox, Pagination } from "../../Components/index";
 
 import { ActionDiv } from "./styles";
 
-const dropdownValues = [
+export const dropdownValues = [
   { type: "section", values: ["hot", "top", "user"] },
   { type: "sort", values: ["viral", "top", "time", "rising"] },
   { type: "window", values: ["day", "week", "month", "year", "all"] }
@@ -59,6 +59,16 @@ const ActionBar = ({ getImages }) => {
     }
   };
 
+  const changeSelected = ({ val, type }) => {
+    setSelected({ ...selected, [type]: val });
+    setIsOpen(false);
+
+    getImages(
+      { ...selected, [type]: val },
+      { ...(selected.section !== "user" ? {} : showViral) }
+    );
+  };
+
   return (
     <ActionDiv>
       {dropdownValues
@@ -68,7 +78,9 @@ const ActionBar = ({ getImages }) => {
         .map(({ type, values }, i) => (
           <Dropdown
             key={i}
+            className={type}
             type={type}
+            id={type}
             values={
               type === "sort" && selected.section !== "user"
                 ? values.filter(val => val !== "rising")
@@ -77,15 +89,7 @@ const ActionBar = ({ getImages }) => {
             selected={selected[type]}
             openDropdown={({ type }) => setIsOpen(type)}
             isOpen={isOpen === type}
-            changeSelected={val => {
-              setSelected({ ...selected, [type]: val });
-              setIsOpen(false);
-
-              getImages(
-                { ...selected, [type]: val },
-                { ...(selected.section !== "user" ? {} : showViral) }
-              );
-            }}
+            changeSelected={val => changeSelected({ val, type })}
           />
         ))}
       {selected.section === "user" && (

@@ -21,6 +21,7 @@ const Pagination = ({
   const renderButtonsLeft = () =>
     Object.keys(buttonIconsLeft).map(key => (
       <Button
+        className={key}
         disabled={currentPage === 1}
         key={key}
         icon={buttonIconsLeft[key]}
@@ -32,6 +33,7 @@ const Pagination = ({
   const renderButtonsRight = () =>
     Object.keys(buttonIconsRight).map(key => (
       <Button
+        className={key}
         disabled={totalPages === currentPage}
         key={key}
         icon={buttonIconsRight[key]}

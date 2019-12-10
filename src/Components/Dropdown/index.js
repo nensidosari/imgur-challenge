@@ -19,7 +19,10 @@ const Dropdown = ({
 }) => {
   return (
     <DropdownContainer>
-      <Underline onClick={() => openDropdown({ type: isOpen ? false : type })}>
+      <Underline
+        onClick={() => openDropdown({ type: isOpen ? false : type })}
+        className={`${type}_open_dropdown_handler`}
+      >
         <Selected>
           {selected && selected.toString().toLocaleUpperCase()}
           <Icon
@@ -31,7 +34,11 @@ const Dropdown = ({
       </Underline>
       <ValuesContainer isOpen={isOpen}>
         {values.map((val, i) => (
-          <Value key={i} onClick={() => changeSelected(val)}>
+          <Value
+            key={i}
+            onClick={() => changeSelected(val)}
+            className={`dropdown_value ${type}_${val}`}
+          >
             {val && val.toString().toLocaleUpperCase()}
           </Value>
         ))}
